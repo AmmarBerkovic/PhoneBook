@@ -1,5 +1,11 @@
 package bildIt.UI;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import bildIt.DTO.Contact;
+import bildIt.DTO.Users;
+
 public class Strings {
 
 	public static String menu() {
@@ -35,6 +41,57 @@ public class Strings {
 			}
 		}
 		return str;
+	}
+
+	public static String usersLoop(List<Users> list) {
+		String text = "";
+		for (int i = 0; i < list.size(); i++) {
+			text += print(0, 0, 0, 1) + "Id - " + list.get(i).getId() + "|| Ime - " + list.get(i).getIme()
+					+ " ||Prezime - " + list.get(i).getPrezime() + print(1);
+		}
+		text += print(0, 0, 0, 1, 2);
+		return text;
+	}
+
+	public static String contactLoop(List<Contact> list) {
+		String text = "";
+		List<Integer> Ids = new ArrayList<>();
+		for (int i = 0; i < list.size(); i++) {
+			Ids.add(list.get(i).getFore());
+		}
+		for (int i = 0; i < Ids.size(); i++) {
+			for (int j = 0; j < Users.getUsers().size(); j++) {
+				if (Users.getUsers().get(j).getId() == Ids.get(i)) {
+					text += print(0, 0, 0, 1) + "Ime: " + Users.getUsers().get(j).getIme() + " ||Prezime - "
+							+ Users.getUsers().get(j).getPrezime() + " ||Broj - " + Users.getUsers().get(j).getBroj();
+					break;
+				}
+			}
+		}
+
+		return text;
+	}
+	public static String contLoop(List<Contact> list) {
+		String text = "";
+		List<Integer> Ids = new ArrayList<>();
+		for (int i = 0; i < list.size(); i++) {
+			Ids.add(list.get(i).getFore());
+		}
+		for (int i = 0; i < Ids.size(); i++) {
+			for (int j = 0; j < Users.getUsers().size(); j++) {
+				if (Users.getUsers().get(j).getId() == Ids.get(i)) {
+					text += print(0, 0, 0, 1) + "Ime: " + Users.getUsers().get(j).getIme() + " ||Prezime - "
+							+ Users.getUsers().get(j).getPrezime() + " ||Id - " + Users.getUsers().get(j).getId();
+					break;
+				}
+			}
+		}
+
+		return text;
+	}
+	public static String witch(){
+		return "Pick Id:\n"+Strings.contLoop(Users.findById(Users.getLoggedId(), Users.getUsers()).getContacts());
+		
 	}
 
 }

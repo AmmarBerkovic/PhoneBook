@@ -31,26 +31,38 @@ public class App {
 					System.out.println(Strings.exception("User not found!!"));
 				break;
 			case 2:
-				DML.insertInto(DataCollection.register());
+				DML.insertIntoUsers(DataCollection.register());
+				break;
+			case 3:
 				break;
 			default:
-				Users.Pokazi(Users.getUsers());
+				
 				break;
 			}
 		}
 	}
 
-	public static void userMenu() {
-		System.out.println("taj: "+Users.getLoggedId());
-		System.out.println(Strings.userMenu());
+	public static void userMenu() throws SQLException {
 		int choose = 0;
 		while (choose != 6) {
 			System.out.print(Strings.userMenu());
 			choose = ScanInt();
 			switch (choose) {
 			case 1:
+				DML.insertIntoContact(DataCollection.pick());
 				break;
 			case 2:
+				DataCollection.update();
+				break;
+			case 3:
+				DataCollection.DeleteUserWithId();
+				break;
+			case 4:
+				System.out.println(Strings.contactLoop(Users.findById(Users.getLoggedId(), Users.getUsers()).getContacts()));
+				break;
+			case 5:
+				break;
+			case 6:
 				break;
 			default:
 				break;

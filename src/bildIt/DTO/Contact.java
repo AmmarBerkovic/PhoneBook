@@ -9,6 +9,9 @@ public class Contact {
 		this.prim = prim;
 
 	}
+	public Contact(){
+		
+	}
 
 	public int getPrim() {
 		return prim;

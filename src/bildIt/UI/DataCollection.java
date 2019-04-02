@@ -1,10 +1,12 @@
 package bildIt.UI;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import bildIt.BO.Checks;
+import bildIt.DAO.DML;
 import bildIt.DTO.Contact;
 import bildIt.DTO.Users;
 
@@ -16,17 +18,17 @@ public class DataCollection {
 		String name = "", password = "", surname = "", number = "";
 		do {
 			name = input.next();
-		} while (Checks.compatibleLength(name, 20) && Checks.noDigits(name) && Checks.firstLetter(name));
+		} while (!Checks.compatibleLength(name, 20) || !Checks.noDigits(name) || !Checks.firstLetter(name));
 
 		System.out.print("Set password: " + Strings.print(1, 2));
 		do {
 			password = input.next();
-		} while (Checks.compatibleLength(password, 20));
+		} while (!Checks.compatibleLength(password, 20));
 
 		System.out.print("Set surname: " + Strings.print(1, 2));
 		do {
 			surname = input.next();
-		} while (Checks.compatibleLength(surname, 20) && Checks.noDigits(surname) && Checks.firstLetter(name));
+		} while (!Checks.compatibleLength(surname, 20) || !Checks.noDigits(surname) || !Checks.firstLetter(surname));
 		System.out.print("Set number: " + Strings.print(1, 2));
 		do {
 			number = input.next();
@@ -35,8 +37,7 @@ public class DataCollection {
 		do {
 			id = Users.getUsers().get(Users.getUsers().size() - 1).getId() + 1;
 		} while (Checks.CompId(Users.getUsers(), id));
-		List<Contact> list = new ArrayList<>();
-		return new Users(id, name, surname, number, password, list);
+		return new Users(id, name, surname, number, password, new ArrayList<>());
 	}
 
 	public static boolean login() {
@@ -45,7 +46,7 @@ public class DataCollection {
 		name = input.next();
 		System.out.print("Enter password: " + Strings.print(1, 2));
 		password = input.next();
-		Users.taj(name, password, Users.getUsers());
+		Users.confLog(name, password, Users.getUsers());
 		if (Checks.init(Users.getUsers(), name, password))
 			return true;
 		else
@@ -53,9 +54,30 @@ public class DataCollection {
 
 	}
 
-	public static String table() {
-		System.out.print("Enter the name of the table: ");
-		return input.next();
+	public static Contact pick() {
+		Contact cont = new Contact();
+		System.out.println(Strings.usersLoop(Users.getUsers()));
+		int choose = input.nextInt();
+		cont.setFore(choose);
+		cont.setPrim(Users.getUsers().get(Users.getLoggedId()).getContacts().size() + 1);
+		return cont;
+	}
+
+	public static void update() throws SQLException {
+		System.out.print("Witch colloumn do you want to change: ");
+		String coll = input.next();
+		System.out.println("With what do you want to change it with: ");
+		String change = input.next();
+		DML.update(coll, change);
+		Users.findById(Users.getLoggedId(), Users.getUsers()).update(coll, change);
+
+	}
+
+	public static void DeleteUserWithId() throws SQLException {
+		System.out.println(Strings.witch());
+		int choose = input.nextInt();
+		Users.findById(Users.getLoggedId(), Users.getUsers()).delete(choose);
+		DML.deleteUser(choose);
 	}
 
 }

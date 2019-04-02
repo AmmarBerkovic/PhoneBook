@@ -8,36 +8,37 @@ import bildIt.UI.Strings;
 public class Checks {
 	public static boolean compatibleLength(String str, int range) {
 		if (str.length() < range)
-			return false;
+			return true;
+		else
 		System.out.print(Strings.exception("String is longer than it sholud be!!!"));
-		return true;
+		return false;
 	}
 
 	public static boolean noDigits(String str) {
 		for (int i = 0; i < str.length(); i++) {
 			if (Character.isDigit(str.charAt(i))) {
-				System.out.print(Strings.exception("String shoud not have digits!!!"));
-				return true;
+				System.out.print(Strings.exception("String shoudnt contain digits!!!"));
+				return false;
 			}
 		}
-		return false;
+		return true;
 	}
 
 	public static boolean firstLetter(String str) {
 		if (Character.isUpperCase(str.charAt(0)))
-			return false;
+			return true;
 		System.out.print(Strings.exception("String should have first letter uppercase"));
-		return true;
+		return false;
 	}
 
 	public static boolean onlyDigits(String numbers) {
 		for (int i = 0; i < numbers.length(); i++) {
 			if (!Character.isDigit(numbers.charAt(i))) {
 				System.out.print(Strings.exception("String shoud have only digits!!!"));
-				return true;
+				return false;
 			}
 		}
-		return false;
+		return true;
 	}
 
 	public static boolean CompId(List<Users> list, int id) {
