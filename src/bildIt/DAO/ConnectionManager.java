@@ -9,7 +9,7 @@ public class ConnectionManager {
 	// podatci potrebni za konektovanje sa sqlom
 	private static final String USERNAME = "root";
 	private static final String PASSWORD = "Password123!";
-	private static final String CONN_STRING = "jdbc:mysql://localhost/phonebook?useSSL=false&serverTimezone=UTC";
+	private static final String CONN_STRING = "jdbc:mysql://localhost/imenik?useSSL=false&serverTimezone=UTC";
 	private static ConnectionManager instance = null;
 
 	// privatni konstruktor - klasa moze biti instancirana samo unutar sebe

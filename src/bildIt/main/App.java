@@ -13,7 +13,7 @@ public class App {
 	private static Scanner input = new Scanner(System.in);
 
 	public static void main(String[] args) throws SQLException {
-		System.out.print("Pick database: ");
+		System.out.print("Pick database (DEFAULT: users): ");
 		String str=input.next();
 		DLL.MajorWithdraw(str);
 		DLL.MinorWithdraw(Users.getUsers());
@@ -63,6 +63,7 @@ public class App {
 				System.out.println(Strings.contactLoop(Users.findById(Users.getLoggedId(), Users.getUsers()).getContacts()));
 				break;
 			case 5:
+				System.out.println(Strings.usersLoop(DataCollection.findBy()));
 				break;
 			case 6:
 				break;

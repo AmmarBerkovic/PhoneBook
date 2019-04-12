@@ -18,7 +18,7 @@ public class Strings {
 
 	public static String userMenu() {
 		return print(0, 0, 1)
-				+ "   1 - Add new contact\n   2 - Edit contact\n   3 - Delete Contact\n   4 - List all contact\n   5 - Find contact\n   6 - Log out"
+				+ "   1 - Add new contact\n   2 - Edit account\n   3 - Delete Contact\n   4 - List all contact\n   5 - Find contact\n   6 - Log out"
 				+ print(1, 0, 0, 1, 2);
 	}
 
@@ -63,7 +63,7 @@ public class Strings {
 			for (int j = 0; j < Users.getUsers().size(); j++) {
 				if (Users.getUsers().get(j).getId() == Ids.get(i)) {
 					text += print(0, 0, 0, 1) + "Ime: " + Users.getUsers().get(j).getIme() + " ||Prezime - "
-							+ Users.getUsers().get(j).getPrezime() + " ||Broj - " + Users.getUsers().get(j).getBroj();
+							+ Users.getUsers().get(j).getPrezime() + " ||Broj - " + Users.getUsers().get(j).getBroj()+"\n";
 					break;
 				}
 			}

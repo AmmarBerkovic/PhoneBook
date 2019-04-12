@@ -50,9 +50,28 @@ public class Users {
 	}
 
 	public List<Users> findByName(String str) {
-		List<Users> list = new ArrayList<>();
+		List<Users> list = new ArrayList<>();//////
 		for (int i = 0; i < this.getContacts().size(); i++) {
 			if (findById(this.getContacts().get(i).getFore(), users).getIme().equals(str)) {
+				list.add(findById(this.getContacts().get(i).getFore(), users));
+			}
+		}
+		return list;
+	}
+	public List<Users> findBySurname(String str) {
+		List<Users> list = new ArrayList<>();//////
+		for (int i = 0; i < this.getContacts().size(); i++) {
+			if (findById(this.getContacts().get(i).getFore(), users).getPrezime().equals(str)) {
+				list.add(findById(this.getContacts().get(i).getFore(), users));
+			}
+		}
+		return list;
+	}
+
+	public List<Users> findByNumber(String str) {
+		List<Users> list = new ArrayList<>();//////
+		for (int i = 0; i < this.getContacts().size(); i++) {
+			if (findById(this.getContacts().get(i).getFore(), users).getBroj().equals(str)) {
 				list.add(findById(this.getContacts().get(i).getFore(), users));
 			}
 		}
@@ -88,16 +107,16 @@ public class Users {
 
 	public void update(String coll, String chose) {
 		switch (coll) {
-		case "ime":
+		case "Ime":
 			this.setIme(chose);
 			break;
-		case "prezime":
+		case "Prezime":
 			this.setPrezime(chose);
 			break;
-		case "broj":
+		case "Broj":
 			this.setBroj(chose);
 			break;
-		case "password":
+		case "Sifra":
 			this.setPassword(chose);
 			break;
 		}

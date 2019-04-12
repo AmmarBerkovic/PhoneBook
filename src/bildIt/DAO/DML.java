@@ -46,7 +46,7 @@ public class DML {
 	}
 
 	public static void insertIntoContact(Contact cont) throws SQLException {
-		query = "insert into user" + Users.getLoggedId() + " values (" + cont.getPrim() + "," + cont.getFore() + ")";
+		query = "insert into user" + Users.getLoggedId() + " values (DEFFAULT," + cont.getFore() + ")";
 		try (Connection conn = ConnectionManager.getInstance().getConnection();
 				Statement stat = conn.createStatement();) {
 			stat.executeUpdate(query);

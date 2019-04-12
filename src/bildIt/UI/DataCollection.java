@@ -2,6 +2,7 @@ package bildIt.UI;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import bildIt.BO.Checks;
@@ -31,7 +32,7 @@ public class DataCollection {
 		System.out.print("Set number: " + Strings.print(1, 2));
 		do {
 			number = input.next();
-		} while (Checks.onlyDigits(number));
+		} while (!Checks.onlyDigits(number));
 		int id = 0;
 		do {
 			id = Users.getUsers().get(Users.getUsers().size() - 1).getId() + 1;
@@ -65,7 +66,7 @@ public class DataCollection {
 	public static void update() throws SQLException {
 		System.out.print("Witch colloumn do you want to change: ");
 		String coll = input.next();
-		System.out.println("With what do you want to change it with: ");
+		System.out.print("With what do you want to change it with: ");
 		String change = input.next();
 		DML.update(coll, change);
 		Users.findById(Users.getLoggedId(), Users.getUsers()).update(coll, change);
@@ -77,6 +78,24 @@ public class DataCollection {
 		int choose = input.nextInt();
 		Users.findById(Users.getLoggedId(), Users.getUsers()).delete(choose);
 		DML.deleteUser(choose);
+	}
+	
+	public static List<Users> findBy() {
+		List<Users> list=new ArrayList<>();
+		System.out.println("Insert colloumn: ");
+		String coll=input.next();
+		System.out.println("Insert key: ");
+		String change=input.next();
+		if(coll.equals("Ime")) {
+			list.addAll(Users.findById(Users.getLoggedId(), Users.getUsers()).findByName(change));
+		} else if(coll.equals("Prezime")) {
+			list.addAll(Users.findById(Users.getLoggedId(), Users.getUsers()).findBySurname(change));
+		} else if(coll.equals("Broj")) {
+			list.addAll(Users.findById(Users.getLoggedId(), Users.getUsers()).findByNumber(change));
+		} else {
+			System.out.println("Colloumn not found!!!");
+		}
+		return list;
 	}
 
 }
