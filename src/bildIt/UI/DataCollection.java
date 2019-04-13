@@ -59,7 +59,6 @@ public class DataCollection {
 		System.out.println(Strings.usersLoop(Users.getUsers()));
 		int choose = input.nextInt();
 		cont.setFore(choose);
-		cont.setPrim(Users.getUsers().get(Users.getLoggedId()).getContacts().size() + 1);
 		return cont;
 	}
 
